@@ -1,0 +1,172 @@
+1.查询sql是用SimpleJdbcTemplate类来实现，主要的是要把数据封装，通过某个Bean类，sql语句，以及一些属性的参数 来进行数据库的操作。
+2.@ResponseBody 只要@RequestMapping的属性设置produces = { "application/json;charset=UTF-8" } 是解决中文乱码的问题
+3.String sql = "update {integral} set total_integral=total_integral+?,use_integral=use_integral+? where user_id=?";
+4.TablePrefixFormat.format(sql) 这个方法是用来重写sql 就是把{}这俩个通配符转换成DQL_和""
+5.BaseDao 这个类是处理最后数据库的层面
+6.注册成功默认手机注册成功 是同时插入1条信息到2个数据库中.
+7.sql中limit使用方法，一共有俩个参数，如果仅仅是一个数n。那么就会输出数据库中前n个的数字；如果有俩个参数n,m，数据库就会输出从n+1开始到n+1+m-1个这个数，其中，这之间一共差距m个数字。所以，m代表个数,n代表起始值-1。一个参数的可以看成0,n
+8.sql中 (where 1=1)主要是用于规范代码。减少写代码时候，由于where的问题的一些额外的工作量.只要在后面要增加的步骤链上相应的条件，使用and或者or连接。键和值只要放在后面就可以了。
+9.pageUrl 是通过后台的request.setAttribute("pageUrl","/front_borrow/toAllInvest.dql") 来查找到的这个后台的spring的对应的路径。前台只要使用el表达式
+${pageUrl}就可以吧这个路径给显示出来。
+10.${pageContext.request.contextPath}表示的是项目的绝对路径。 
+11.fn:contains 判断字符串是否包含另外一个字符串 <c:if test="${fn:contains(name, searchString)}"> 如果包含，返回true;否则，返回false。 
+12.@Autowired和@Resource注解的关系? ==> http://blog.csdn.net/gst6062825/article/details/8765157
+13.关于spring的装配数据:首先是创建一个Service的接口类，然后再有一个接口的实现类，而Service的接口类在Controller类中有相应的对象，已经接口的set和get方法。
+通过spring中的IOC来控制反转，把Service的接口实现类注入到Service接口中，然后只要每次调用这个接口的相应的方法就会默认在接口的实现类中进行调用。 
+14.njb,首先是通过前台的dql语句跳转到后台的相应的Controller的方法里面，找到对应的RequestMapping的路径来进行查找到相应的方法，在这个方法的参数中，如果有一
+些相应的Bean类型的参数，那么就是前台通过ajax方法进行传参得到的，后台进行接收。进入到Controller类，这个主要是实现一些业务逻辑的，最后处理完毕就会跳转到一
+个新的jsp页面。配置的方法是在applicationContext-web.xml这个文件中，通过匹配后缀的jsp来进行路径的相对定位。其中，遇到关于数据库的一些操作则是通过Service
+这写类来实现，最终的实现方法是在Basedao中jdbcTemplete的API来进行具体的实现。
+15.BeanMapUtil类中，主要功能是反射成当前的Bean类。BeanInfo是获得当前的Bean类，PropertyDescriptor[]之后是获得当前类中的所有方法的描述。
+16.jstl中<fmt:formatNumber>标签用于格式化数字,百分比,货币。 
+17.<c:foreach ></c:foreach> 中的属性varStatus 作用 ==>http://blog.csdn.net/ocean_30/article/details/6794743
+18.重新的修改mysql数据，方法1:直接通过右键导出中的执行sql脚本来找到想要导入的.sql文件。方法2:在.sql文把Drop 这行开始到最后的创建表的语句，进行执行，就会
+把数据库中没有的字段重新的创建一份。
+19.disabled="disabled" 禁用一个 input 元素。
+20.p2p 就是系统有俩个页面，一个是管理员的页面，一个是用户投资的页面。用户投资或者充钱都是先传到管理员页面进行确认，成功之后，才会反馈给用户继续他的操作。在管理员页面中也是可以对用户的信息进行筛选和删除。
+21.所有页面上的那些el表达式都是通过登录这个页面的后台中进行request.setAttribute(key,value)中的key键,获取到的。
+22.关于jdbcTemplete的query方法，第二个参数是RowMapper。sql语句主要是通过通配符和数据后的? 通过第三个参数进行数据的绑定。
+23.数据的分页查询 后台查找也是通过limit关键字继续查找的。但是 数据不多的话，也是可以通过前台js进行控制分页的。但是数据太多的话就会浪费内存。主要是通过包装类pageBean这个类控制分页的各种信息进行查找的。
+24.String.valueOf() 方法 用来匹配数值是否这个字符串中，如果没有则返回-1。
+25.PageEncodingFilter这个类主要是用来 输入系统包名时候的过滤。
+26.FilterChain.doFilter()方法 主要是用来进入到web.xml中的下一个filter。
+27.浏览器中的js脚本的调试 主要是通过开发者工具中的Source 然后进行断点,之后重新运行 当前页面 进入测试的方法中，通过shift+f11进行 调试。(主要是可以在上面看到当前的变量的值。)
+28.手机端和pc端和返回。手机端，主要是通过Map或者别的容器进行返回;pc端，主要是返回一个页面路径，然后要返回值的内容主要是存放在request.setAttribute()中，在前台进行输出。
+29.javabean的包装类，存在import java.beans.PropertyDescriptor包中。中有一方法getReadMethod()用来判断写入属性的方法，然后，再通过invoke方法进行动态的调用方法。invoke方法中主要有俩个参数:1.调用底部类中的对象名 2.就是用于调用方法的参数。如果底层方法是静态的，那么可以忽略指定的 obj 参数。该参数可以为 null。如果底层方法所需的形参数为 0，则所提供的 args 数组长度可以为 0 或 null。
+30.关于springmvc的初始化:首先是 初始化Servlet体系子类httpServletBean中的init方法，在其中，会在子类FrameworkServlet中实现init()方法，在实现过程中，主要还有调用initWebApplication方法用来初始化web容器的上下文。最后会通过onRefresh方法，跳转到DispatcherServlet中的onRefresh的具体实现方法，用来实现springmvc中的9大组件。
+31.关于加载的问题，首先先是通过监听器刷新 环境中的root applicaiton(容器上下文)然后再是刷新springmvc的application上下文。关于上下文就是 局部变量中的所有的属性。 首先通过配置文件到servlet中，然后再是搭建内部的root环境变量，最后就是搭建springmvc的环境变量。所以，springmvc application,root application 和 servlet是继承关系。springmvc ==> root==> servlet
+32.关于数据的加密，主要是在通过md5、Base64、Aes、Des和3Des 这些工具进行加密和解密。这些工具类主要存在com.daiqile.baofoo.util 路径下的SecurityUtil类。
+33.实名认证这一模块， 主要是最后通过把用户名和身份证传到宝付(baofoo)这个第三方api来进行校验匹配。最后通过返回一个状态来判断。是否通过审核，但是对于本地服务器中的网页访问，宝付主要是有一个域名拦截。本地不能通过。
+34.认证支付是通过绑定的银行卡进行支付;网银支付是通过宝付 第三方进行支付的。
+35.关于用户的赎回。在dql_account 表中，total(总金额)use_money(用户可用的金额)no_use_money(冻结金额)collection(盈利金额)。这是投标所用的表，首先是发标，用户会选择自己想要的标数，并且附上想要的投标比例(这个比例是其他用户一共会帮你融的总额度的百分比，例如你要投10000，比例90%，那么其他用户会帮你融资9000元。剩下1000需要自己来交)。关于赎回的金额，就是在投标的时间满了之后，融资的用户在发标人还完平台后，平台再把你盈利的额度赎回成你的总金额。 关于资金的流动在 数据库中的显示，就是首先是用户是总金额，然后进行投标后，那么就会把投标的钱放到冻结金额中，然后等标投满后，就会得到一个盈利金额，等到那个发标人全部都还给平台后，平台在吧这个盈利的金额数 也回馈给投标的总金额中。
+36.表属性
+   dql_borrowType 是投标的类型。包括 理财标，新手标和流标。 
+   dql_borrow 是投资的公司的信息。 主要运用在"我要投资"模块。
+   dql_account 是用户发标和投标的具体信息。
+   dql_borrow_tender 是所有用户的投标信息。
+37.关于投标:具体就是A用户要借钱，设置还钱的利息,审核通过后，发布到前台。在发布后有一个融资的期限。B和C用户就是进行投标，投出去的钱就会被系统冻结。如果，在这个期限内，满标(凑够钱)的话，那么B和C用户的冻结金额就会转移到A用户名下。流标(期限内没凑够钱)，那么就会把B和C用户中的冻结金额解冻，退换金额给B和C用户，那么A用户就算是融资失败。
+
+项目以外:
+  1.分布式缓存?==>http://developer.51cto.com/art/201411/457423.htm
+  2.分布式架构?==>http://blog.csdn.net/binyao02123202/article/details/32340283/
+  3.关于eclipse构建一个maven项目?==>http://www.cnblogs.com/noteless/p/5213075.html（注:包的冲突，主要是在文件目录下的.setting文件中的那些.xml文件进行相应修改）
+  4.在maven中添加依赖==>就是在pom.xml右键 点击add Dependencies就行
+  5.maven中的plugin节点是用作为父节点的，为了让子项目能够继承这个当前这个项目中的包。
+
+问题:
+1.为什么log4j输出到控制台后，使用system.out.println()输出不了?==>通过debug里面的那些value进行查找，不确定为什么会打印不出来。
+2.关于springMVC方法中的属性的匹配，例如方法toAllInvest(HttpServletRequest request, HttpSession session, InvestQuery investQuery)，第三个Bean类型的参数
+是如何的实现数据的装配？==>如果页面上没有这个值那么就会是null，不匹配。如果有的话，那就是通过ajax来进行异步加载到后台，然后后台的方法就会相应的取出值来。
+3.为什么在注册这一块，前台通过ajax传到后台成功后接受到的值是后台注释掉的？==》之前的项目有问题，从svn重新导入了，并且重新的部署了Tomcat服务器。
+4.关于后台页面的开始显示的模块，通过俩句相同的sql语句来进行list的装配，实现页面属性，逻辑是怎么实现的？-->通过登录的权限来查询对应的模块，然后再通过查询
+的一级模块的id作为第二次查询的pid来继续查询到第二级菜单。
+5.关于数据的分页，通过后台进行操作? -->主要是通过jq来进行那些页码的判断，通过pageBean的属性来控制显示的数据，个数。最后通过jq中提交表单来进行数据的查找，并且提交表单。
+6.为什么充值金额的手续费是要通过相乘的?==>手续费是存在dql_system表中，所对应的手续费的结果代表的就是百分之几。比如1代表的是1%。手续费就相当于是 总额的百分之几 之类的。
+7.确认添加的 按钮的位置在哪的?class属性是怎么取的?方法在哪调用的？
+8.tomcat 引言不允许为空? ==>tomcat由于一些意外使得数据没有一致，(主要是来个server的内容要一样)。一个是部署的tomcat一个是本地的tomcat。本地的tomcat在\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0（临时文件）的conf目录下的server中。俩者的server要内容一致。另一种方法就是，重新部署tomcat简单粗暴。
+9.什么是还款计划?关于dql_borrow_repayment这个数据库中的字段作用?
+10.如何解决在同个时间点俩个人进行投资就会可能产生冲突?==>在俩者都投资的方法这块加上同步代码块，就是把这个共用的方法给他一个同步的标志，变成同步方法。
+11.linux操作系统中搭建mysql时候，如何跳过登录时候密码？==>http://blog.csdn.net/qq_17392301/article/details/50687065
+12.多表查询时，使用多表连接，获得到一个新表，那么返回的值是哪个表的对象类?==>在返回的这个对象的类中添加一条记录，用来保存返回的信息。
+13.tail f catalina.out 退出tail命令?==>Ctrl+C
+
+发送短信
+前台通过ajax跳转/front_home/codeRegister.dql 发送前台 验证码(inputCode) 手机号码(mobilePhone) 登录密码(loginPassword1)
+为contriller/front/main/HomeController类中的codeRegist方法-->
+首先判断输入的手机号码有没有存在数据库中==>findByMobilePhone(String mobilePhone)  
+然后，就是取得数据库中发送给用户的信息，用replaceAll来替换数据库中的通配符({123456}),取得发送到手机中的信息==>findValueByNid("con_SMS_regTemplate")
+由于是测试,就把信息发送到提交的地址==>findValueByNid("con_SMS_url")
+最后是通过sendSMS()实现的 
+在保存的类中 最后是通过jdbcTemplete.update这个方法来实现数据的查询。对应是sql语句和语句对应的值。
+
+我要投资:
+  首先，通过front_borrow/toAllInvest.dql进入到BorrowController类的toAllInvest方法。
+  由于是通过导航栏进入的，第一次时候，InvestQuery是没有得到值的，所以，查的就是所有值，在internal这个内部方法里没有添加查询的限制因素。
+  但是，如果修改页面中的单选框，那么会通过ajax方法重新进入到这个方法中来，通过前台就会把InvestQuery类中对应的一些属性名字的值都加载进去，再通过方法进行
+查找匹配值。
+  如果，查找到了就会在后台通过request.setAttribute来吧前台中的一些分页的属性值都设置进去。
+  最后就在前台页面中通过el表达式，进行数据的解封包装，实现对应显示。   
+
+单个投资:
+   点击前台的单个投资后，跳转到BorrowController的toInvestByBorrow方法。
+   首先获得当前的项目id，并且找到项目信息。
+   再是查询到当前用户的账户信息。
+   查到当前标的所有投标人。
+   查找还款计划，并且查找到推荐项目。
+
+我要借款:
+首先，获取到当前用户登录时候的用户id，继续查找用户是否进行实名认证。
+
+注册成功:
+  直接跳转到页面进行实名认证弹出窗的判定。(不用进行用户的登录操作)如果确定则是跳转到front_user/safetyCenter.dql?a=userinfo
+  为UserControllre的passwdAndQuestion的方法。
+  首先是在登录的时候就通过Session保存了注册的信息，成功后就通过get方法来获取信息。
+  之后，就是根据刚注册用户的id来查找邮箱(email)，手机(mobile)，交易信息(borrow)，vip(认证表),RealName(实名认证信息),pany(企业认证)
+  通过request.setAttribute(),把查询到的结果加入到前台，通过el表达式来进行读取。
+
+管理员默认中间页面显示:
+  在页面中通过/rbac/findchild.dql?id=1来显示进入后台系统的首页。
+  跳转到rbacController类中的findchild方法。
+  先是获得登录到后台系统人的信息。
+  然后通过seleListBypidAnddepid方法,传入user.getDepart(估计是权限)参数和1级菜单的参数id=1。进行数据库的连表查询。
+  查询出二级菜单的所有信息保存在list中。
+  通过查询出的二级菜单的id作为第二次查询的pid进行查询出三级菜单。
+  二级菜单把三级菜单通过setChildrole方法,进行设定(setChildrole方法是一个在公共的Bean类中设定的ArrayList的变量)
+  最后就是通过request.setAttribute()把二级菜单返回，前台el表达式进行设定。
+
+实名认证模块:
+  首先登陆到实名认证模块前，会根据电话号码来查找用户，查找到后保存信息到request中。
+  在页面中通过el表达式进行保存对应的name信息中。
+  之后，点击认证后，就会跳转到ApproveController类中的realApprove方法。
+  获得用户对应的id，姓名和身份证。通过findByIdCardNo方法判断身份证是否存在数据库。
+  设置用户信息。
+  重新定义 名字(id_card)、身份证(id_holder)、商户号(member_id)、终端号(terminal_id)、加密类型数据(data_type)、交易子类(txn_sub_type)、身份证类型(id_card_type)、宝付公钥(cerpath)和商户私钥(pfxpath)
+  通过公钥和私钥的path路径进行查找是否存在。 
+  定义 商户流水号(trans_serial_no)、商户订单号(trans_id)、订单日期(trans_date)和商户ip(clientIp)
+  定义一个map数组进行分装 身份证数据。
+  判断之前有一个对象名为 加密类型，分为xml和json的解析。最后，解析这些数据成为一个字符串(XmlOrJson)。用于提炼数据。xml通过MapToXMLString.converter()方法组合成xml文件，json通过JSONObject.fromObject()方法进行组成json文件。
+  对解析成功的数据串进行base64加密。然后再是私钥文件进行加密RsaCodingUtil.encryptByPriPfxFile。
+  保存网上私钥文件判定的 路径和参数。最后通过HttpUtil中的RequestForm中的doRequest方法进行创建HttpCluient来进行网络请求。通过第三方的api(baofoo) 进行判断是否成功。（ps:由于我选择登录的时候是通过本地登录的，直接使用baofoo的路径就会默认的被域名拦截。所以在本地是没法进行判断。）
+   提交后就会返回一个报文的信息。然后再对返回的报文进行判断。存在就会对这个报文进行解密RsaCodingUtil.decryptByPubCerFile。
+   最后将解密而来的数据进行转换为map类型，最后进行判断。如果返回的"resp_code"键的值为0000，那么就设置realName的Status的状态为1(成功)。
+   之后就是保存信息到数据库中。
+
+我要充值模块:
+  在nav.jsp页面中点击我要充值，就会跳转到/front_recharge/toRecharge.dql 跳转到RechargeController类中的toRecharge方法。
+  先是获得用户的登录信息，通过session取得。
+  通过status状态来查找可以支付的方式。
+  查找用户绑定的银行卡。
+  然后，把查找出的结果绑定到前台。
+  查找是否实名。把查找到的结果信息保存在map容器中。
+  跳转到front/user/myAccount/recharge&cash/recharge.jsp页面。
+  点击确认充值进入到front_recharge/recharge.dql
+  也是先判断用户是否实名。
+  获得银行节点。获得用户绑定的银行卡。
+  使用BigDecimal类来进行 截取手续费后的 最后金额。
+  获得当前时间。保存充值记录到数据库。
+
+管理员top页面:
+  首先是通过adminLogin 跳转到mgr_employee/adminLogin.dql 后台，同样查询所有的菜单信息。保存在allModules键中。
+  top页面上，通过判断dql_rbac_role的pid==0来筛选出一级菜单。然后进行显示。
+
+流程：
+  投标，一共分三类，新手标，还有俩个要求标。
+  投标成功之后，就是我要投资。
+  投资成功后，涉及到资金的转让，还有购买。
+  在每一个流程的后面就是会把自己当前的金额与涉及到的金额进行比对。获得各自的差额之后的钱就是剩下的金额。
+  每一个用户都有他们自己的信息，然后还有任务就是把用户的每个信息都进行完善。
+
+投资 BorrowTenderService invest方法:
+  通过BorrowTender类中保存的borrow_id来查找当前的投资的项目。
+  同样，通过user_id来查找用户的账户信息。
+  绑定数据：red_type_id(红包类型),lowest_account(满的金额),red_account(抵用红包)
+  通过红包的id来查找到当前的红包类。
+  再是判断红包的类型id是1还是2，用来判断是加息券还是红包券。
+  如果是红包，则会把对应的红包满和减的信息对应的显示在lowest_account和red_account中。
+  查询当前用户是否实名。
+  都成功则是会显示surplus(剩余可投资的金额)
+  定义tenderTotal=0,（用户投资金额）
+
+之后自己编写的注意点：
+  在转账这一模块，主要也是有一个注意点就是如果俩个人在同一个时间段点击转账的按钮，那么极有可能就会让着笔钱转啦俩次。(遇到的时候 要注意一下)===>解决方法就是使用同步代码块synchronized
+  在自己以后编写的时候，主要还是先看差不多的功能模块，然后在找到差不多的功能代码，然后模仿逻辑思考。

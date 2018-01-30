@@ -1,0 +1,252 @@
+1.YXDate.TimeStamp2DateTime() 方法是用来规范化时间标准的。就是把毫秒转换成年月日-时分秒的类型的。转换前用的是long类型。
+2.第三方的拦截器，有个回调的方法，服务器返回可能会分12种方式进行回传数据。在接受数据的时候，用的是先判断状态，然后再是修改状态。
+3.第三方接口的时候，可能会有白名单和黑名单。本地不用测试，在测试服务器上进行测试。
+4.还息方式:等额本息，一次性还本付息，按月付息。
+借10000块钱   收益率12%     收益为1200块钱   最后还款11200块钱
+5.等额本息:第1月10000*12%/12，第二月为(10000-10000*12%/12)*12%/12 以后几个月同理
+6.一次性还本付息:在最后一个月支付11200块钱
+7.按月付息:将收益按月等分。每个月支付100块钱，最后一个月支付10100块钱
+8.使用接口时，关闭过滤器。过滤器在 一个page...java这个包中。每一个对应的方法都在相应的接口之中。
+9.在红包支付中，会有一个加息红包，加息红包支付就是可以获得红包收益等值的价钱，然后这个价钱就是平台来进行“支付”，其实就是在平台中加个数据，没有现金的交易。就是让借款人提高收益的。
+10.shiro 权限管理，主要也是通过设置令牌登录，并且产生本机管理员的权限。 有三个机制:缓存机制、散列算法、加密算法  ==》http://www.cnblogs.com/learnhow/p/5694876.html
+11.weblogic和tomcat:俩这都是部署服务器，tomcat比较的普及，但是 tomcat这是完成了jsp&servlet的整合，没有整合EJB。而weblogic 则是整合ejb ,jsp,servlet,jms等一些框架。俩者都是基于java编写的。EJB 就是将那些"类"放到一个服务器上，用C/S 形式的软件客户端对服务器上的"类"进行调用。
+12.ejb主要是部署的是分布式！主要运用的是运用RMI(远程调用)通信来连接服务器。
+	EJB实现原理：就是把原来放到客户端实现的代码放到服务器端，并依靠RMI进行通信。
+	服务器集群：就是通过RMI的通信，连接不同功能模块的服务器，以实现一个完整的功能。 
+	EJB规范定义了EJB组件在何时如何与它们的容器进行交互作用。容器负责提供公用的服务，例如目录服务、事务管理、安全性、资源缓冲池以及容错性。但这里值得注意的是，EJB并不是实现J2EE的唯一途径。
+  ---》http://blog.csdn.net/han_yankun2009/article/details/22784559
+13.isEmpty 这的是分配好了内存对象，但是这个对象里面没有值。 而==null则是一种无值状态，没有分配好内存对象的状态。实例化对象和""值代表是已经分配好内存的。==null 则是没有分配值的。
+14.JNotify 缓存的逻辑，就是在下次使用的时候查询本地缓存的dll文件（Win下的是dll文件，Linux下是so文件），然后是监控系统文件有没有进行修改，如果有就可以判断来取。JNI技术，让Java代码可以实时的监控制定文件夹内文件的变动信息。
+15.关于投资:投资就是一个公司把一个项目贡献出来让别人进行判断，是否可以投资。然后，投资成功就会在一定的时间内进行返现，得到收益。
+16.分布式:ejb weblogic JBoss 缓存:oscache(页面)cache（java Map保存）数据保存:redis 权限管理:shiro  
+工作流:JBPM或者activity5 认证管理:sso java高级:高并发和大数据
+17.mybatis配置 java:
+	DataSource dataSource = BlogDataSourceFactory.getBlogDataSource();
+	TransactionFactory transactionFactory = new JdbcTransactionFactory();
+	Environment environment =
+	new Environment("development", transactionFactory, dataSource);
+	Configuration configuration = new Configuration(environment);
+	configuration.addMapper(BlogMapper.class);
+	SqlSessionFactory sqlSessionFactory =
+	new SqlSessionFactoryBuilder().build(configuration);
+	  配置xml:
+	<configuration>
+	  <environments default="development">
+	    <environment id="development">
+	     <transactionManager type="JDBC"/>
+	     <dataSource type="POOLED">
+	       <property name="driver" value="${driver}"/>
+	       <property name="url" value="${url}"/>
+	       <property name="username" value="${username}"/>
+	       <property name="password" value="${password}"/>
+	     </dataSource>
+	    </environment>
+	   </environments>
+ 	   <mappers>
+	     <mapper resource="org/mybatis/example/BlogMapper.xml"/>
+	   </mappers>
+ 	</configuration>
+--->MyBatis3文档
+mybatis是以sql搭建的文档。主要也是通过xml文件来搭建sql语句。#{id}为参数标识。 id="selectPerson" parameterType="int" resultType="hashmap" 传入的参数是int类型，返回的是HashMap，方法名为selectPerson
+18.可以在number里面进行俩个number类型进行操作。例如:new Number(accountYes / account * 100);accountYes和account都是俩个number对象实例过的。
+19.dql_borrow_Tender 表是用户投资标表。dql_security 表是用户上锁表。
+20.连接测试服务器 mysql链接ssh通道，通过服务器账号密码进行连接。mysql通过配置服务器中的自己设定的账号密码进行连接。把本地数据库和编译好项目文件放到Xftp中，设置tomcat默认创建的页面是webapp下的ROOT文件。把自己的项目改成root目录就可以直接登录到那里。
+21.Xshell 中tomcat的启动方式 : 首先是cd /usr/local/tomcat/apache-tomcat-8.0.44/bin 这个路径下的tomcat启动项，然后./shutdown.sh 关闭tomcat的服务，再./startup.sh 开启tomcat服务 还有就是tail -f ../logs/catalina.out 来查看日志的内容。
+22.ssh:	114.55.55.138   
+	JAVAdql2017@@@	
+	SET GLOBAL max_allowed_packet=200000000;
+	set global net_buffer_length=10000;
+设置最多的记录。
+23.Http协议提交中方法:get能够提交的大小最多1024字节，post没有限制。
+24.tcp发送的报文有四个:fin syn ack data 
+25.servlet的方式:首先是 通过WebClient 来传入到Servlet容器中，服务器会自动的创建一个HttpRequest封装类对象来进行接收这些信息。同时，还会默认创建HttpResponse对象，作为服务器的返回参数。最后是讲这俩个对象封装到HttpServlet中，在HttpServlet会调用HttpResponse的对象方法，产生响应数据进行返回，然后把结果传回WebClient。
+26.Tomcat的编译的结果的查看方式:在server中打开tomcat页面。点击open lauch configuratio中选择arguments在vm arguments中可以查看tomcat的路径。
+27.OutOfMemory和StackOverFlow:前者为超过了最大的内存。(内存溢出) 后者为请求栈深度大于允许栈深度报的错误。
+28.bean2Map 这个方法就是把一个实体类转换成一个map对象。
+29.NamedParameterJdbcTemplate中的update方法，接受三个参数。sql语句，SqlParameterSource 类，和KeyHolder类。SqlParameterSource类中主要有俩个实现方法，一个是BeanPropertySqlParameterSource接受javabean的对象，另一个是MapSqlParameterSource类，主要接受的是Map对象。
+30.BeanPropertyRowMapper需要一个对应的实体类，实体类中的属性与sql中的字段要对应相等。
+31.admin=jdbcTemplate.queryForObject(sql,mapper)描述，首先，返回的对象是admin，内有字段。mapper属性则是一个RowMapper方法，参数为ResultSet对象，实现实例化。（手动返回值）待这个queryForObject方法进入到spring容器中，会调用execute(sql)方法返回一个resultSet对象值，然后会把这个resultSet值进行读取，通过mapper规则进行限制取值。最后返回这个Admin对象。
+GUARANTEE_ID，TENDER_TIMES
+120.26.130.106 Daiqile2017@@@
+32.EJB:是服务器集群，基于一个RMI(远程调用)的技术，实现分布式。就是把一些逻辑放在远程服务器上，客户端负责远程服务器的数据请求。RMI主要是通过将数据序列化成一堆的二进制数据，然后通过发送报文的信息进行传递数据到远程服务器。每一个客户端的程序，其中的每一个数据的交互，每一个模块可能都存在于不同的服务器中，实现各个模块就需要远程调用不同服务器中的不同的方法，整个过程链接起来就是一个服务器群组。但是数据库这一块就需要每个服务器进行调用数据库，数据库的压力就会很大，很难达到负载均衡。
+33.java.lang.InstantiationException这个问题在使用类反射实例化某个对象时,如果这个对象不包含无参数的构造函数,也会出现这个错误,解决办法是在这个要通过类反射实例化的这个类中添加一个空的无参数构造函数就可以了.
+34.关于BigInteger:this.subtract(val)-->this-val   this.multiply(val)-->this*val   this.divide(val)-->this/val
+35.投资的时候 是不会有待收表的相关的信息，状态也不会变。只有投满了，才会开始有待收和已还款。
+36.在满标复审通过之后，才会在后台生成待收表和待还表。同时，也会将用户的冻结金额转业到待收金额中去。、
+37.首页中，关于进度条，主要是用的是bundle.js，设置进度条的时候主要用的是value来控制，所以每一条记录的进度条都需要后台进行设置。
+38.现在，已有问题就去问小胖，一有问题就去问他，把不会变成了常饭，就想着问别人，自己也不先思考，直接扔给他，这样根本就没什么意义。我主要是来学习的，学习。
+39.关于委托:ps(这模式主要是在看到侨联模式(bridge)产生的，虽然这个一直在用，但是并不知道概念，今天看到了就梳理了一下。) 委托，顾名思义，就是让别人帮忙。在类中的实现关系就是在实例化的时候传入一个接口或者抽象类，然后，将这个抽象类注入之后，动态的调用了次类中的方法，这就是委托。委托就是基于自己方法生成后调用别人的方法的例子。委托是一种弱关联关系。
+40.PooledByteBufAllocator
+
+例如:
+public Display(DisplayImpl impl){
+	this.impl = impl;
+}	
+public void open(){
+   impl.rawOpen();
+}
+
+
+//打印机api 使用方法
+import java.io.File;  
+import java.io.FileInputStream;  
+import javax.print.Doc;  
+import javax.print.DocFlavor;  
+import javax.print.DocPrintJob;  
+import javax.print.PrintService;  
+import javax.print.PrintServiceLookup;  
+import javax.print.ServiceUI;  
+import javax.print.SimpleDoc;  
+import javax.print.attribute.DocAttributeSet;  
+import javax.print.attribute.HashDocAttributeSet;  
+import javax.print.attribute.HashPrintRequestAttributeSet;  
+import javax.swing.JFileChooser;  
+  
+    /** 
+     * 建立与打印机的连接 
+     * @author Administrator 
+     * 
+     */  
+public class PrintDemo {  
+      
+    public static void main(String[] args) {  
+        JFileChooser fileChooser = new JFileChooser(); //创建打印作业  
+        int state = fileChooser.showOpenDialog(null);  
+        if(state == fileChooser.APPROVE_OPTION){  
+            File file = new File("D:/zkyzl.txt"); //获取选择的文件  
+            //构建打印请求属性集  
+            HashPrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();  
+            //设置打印格式，因为未确定类型，所以选择autosense  
+            DocFlavor flavor = DocFlavor.INPUT_STREAM.AUTOSENSE;  
+            //查找所有的可用的打印服务  
+            PrintService printService[] = PrintServiceLookup.lookupPrintServices(flavor, pras);  
+            //定位默认的打印服务  
+            PrintService defaultService = PrintServiceLookup.lookupDefaultPrintService();  
+            //显示打印对话框  
+            PrintService service = ServiceUI.printDialog(null, 200, 200, printService,   
+                    defaultService, flavor, pras);  
+            if(service != null){  
+                try {  
+                    DocPrintJob job = service.createPrintJob(); //创建打印作业  
+                    FileInputStream fis = new FileInputStream(file); //构造待打印的文件流  
+                    DocAttributeSet das = new HashDocAttributeSet();  
+                    Doc doc = new SimpleDoc(fis, flavor, das);  
+                    job.print(doc, pras);  
+                } catch (Exception e) {  
+                    e.printStackTrace();  
+                }  
+            }  
+        }  
+    }  
+}
+	===>http://blog.csdn.net/u012854263/article/details/51137097
+
+//excal api 使用方法
+package oa.common.utils;  
+import java.io.OutputStream;  
+import java.util.List;  
+import javax.servlet.http.HttpServletResponse;  
+import org.apache.struts2.ServletActionContext;  
+import java.lang.reflect.Field;  
+import jxl.Workbook;  
+import jxl.format.Alignment;  
+import jxl.format.Border;  
+import jxl.format.BorderLineStyle;  
+import jxl.format.VerticalAlignment;  
+import jxl.write.Label;  
+import jxl.write.WritableCellFormat;  
+import jxl.write.WritableFont;  
+import jxl.write.WritableSheet;  
+import jxl.write.WritableWorkbook;  
+/*** 
+ * @author lsf 
+ */  
+public class ExportExcel {  
+ /*************************************************************************** 
+  * @param fileName EXCEL文件名称 
+  * @param listTitle EXCEL文件第一行列标题集合 
+  * @param listContent EXCEL文件正文数据集合 
+  * @return 
+  */  
+ public  final static String exportExcel(String fileName,String[] Title, List<Object> listContent) {  
+  String result="系统提示：Excel文件导出成功！";    
+  // 以下开始输出到EXCEL  
+  try {      
+   //定义输出流，以便打开保存对话框______________________begin  
+   HttpServletResponse response=ServletActionContext.getResponse();  
+   OutputStream os = response.getOutputStream();// 取得输出流        
+   response.reset();// 清空输出流        
+   response.setHeader("Content-disposition", "attachment; filename="+ new String(fileName.getBytes("GB2312"),"ISO8859-1"));  
+// 设定输出文件头        
+   response.setContentType("application/msexcel");// 定义输出类型      
+   //定义输出流，以便打开保存对话框_______________________end  
+  
+   /** **********创建工作簿************ */  
+   WritableWorkbook workbook = Workbook.createWorkbook(os);  
+  
+   /** **********创建工作表************ */  
+  
+   WritableSheet sheet = workbook.createSheet("Sheet1", 0);  
+  
+   /** **********设置纵横打印（默认为纵打）、打印纸***************** */  
+   jxl.SheetSettings sheetset = sheet.getSettings();  
+   sheetset.setProtected(false);  
+  
+  
+   /** ************设置单元格字体************** */  
+   WritableFont NormalFont = new WritableFont(WritableFont.ARIAL, 10);  
+   WritableFont BoldFont = new WritableFont(WritableFont.ARIAL, 10,WritableFont.BOLD);  
+  
+   /** ************以下设置三种单元格样式，灵活备用************ */  
+   // 用于标题居中  
+   WritableCellFormat wcf_center = new WritableCellFormat(BoldFont);  
+   wcf_center.setBorder(Border.ALL, BorderLineStyle.THIN); // 线条  
+   wcf_center.setVerticalAlignment(VerticalAlignment.CENTRE); // 文字垂直对齐  
+   wcf_center.setAlignment(Alignment.CENTRE); // 文字水平对齐  
+   wcf_center.setWrap(false); // 文字是否换行  
+     
+   // 用于正文居左  
+   WritableCellFormat wcf_left = new WritableCellFormat(NormalFont);  
+   wcf_left.setBorder(Border.NONE, BorderLineStyle.THIN); // 线条  
+   wcf_left.setVerticalAlignment(VerticalAlignment.CENTRE); // 文字垂直对齐  
+   wcf_left.setAlignment(Alignment.LEFT); // 文字水平对齐  
+   wcf_left.setWrap(false); // 文字是否换行     
+   
+  
+   /** ***************以下是EXCEL开头大标题，暂时省略********************* */  
+   //sheet.mergeCells(0, 0, colWidth, 0);  
+   //sheet.addCell(new Label(0, 0, "XX报表", wcf_center));  
+   /** ***************以下是EXCEL第一行列标题********************* */  
+   for (int i = 0; i < Title.length; i++) {  
+    sheet.addCell(new Label(i, 0,Title[i],wcf_center));  
+   }     
+   /** ***************以下是EXCEL正文数据********************* */  
+   Field[] fields=null;  
+   int i=1;  
+   for(Object obj:listContent){  
+       fields=obj.getClass().getDeclaredFields();  
+       int j=0;  
+       for(Field v:fields){  
+           v.setAccessible(true);  
+           Object va=v.get(obj);  
+           if(va==null){  
+               va="";  
+           }  
+           sheet.addCell(new Label(j, i,va.toString(),wcf_left));  
+           j++;  
+       }  
+       i++;  
+   }  
+   /** **********将以上缓存中的内容写到EXCEL文件中******** */  
+   workbook.write();  
+   /** *********关闭文件************* */  
+   workbook.close();     
+  
+  } catch (Exception e) {  
+   result="系统提示：Excel文件导出失败，原因："+ e.toString();  
+   System.out.println(result);   
+   e.printStackTrace();  
+  }  
+  return result;  
+ }  
+}  

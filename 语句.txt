@@ -1,0 +1,42 @@
+sql:
+select r.pid,r.id,r.`name`,r.url from (select * from dql_rbac_dept_role d where d.dept_id="
+				+ dept_id + " ) dr left JOIN dql_rbac_role r on dr.role_id=r.id order by r.id asc"
+
+ select r.pid,r.id,r.`name`,r.url from (select * from dql_rbac_dept_role d where d.dept_id="
+				+ dept_id
+				+ " ) dr left JOIN dql_rbac_role r on dr.role_id=r.id where r.pid="
+				+ pid + " order by r.id asc
+
+(select * from dql_rbac_dept_role d where d.dept_id="+ dept_id+ " )
+在dql_rbac_dept_role 表中通过d.dept_id（方法中传入的参数是管理员表中的depart字段 1）筛选出对应的所有信息
+left JOIN dql_rbac_role r 此表是所有的子模块。
+
+此sql主要是通过管理员的depart来查找到子模块的一些对应的信息。升序排列
+
+for (int i = 0; i < list1.size(); i++) {
+// for(ROLE2 r:list1){
+	rbac_Role role = list1.get(i);//查找到 子页面的id
+	ArrayList<rbac_Role> list2 = (ArrayList<rbac_Role>) rbacService
+			.seleListBypidAnddepid1(dept_id, list1.get(i).getId()+ "");
+	list1.get(i).setChildrole(list2);
+}
+第二次传进来的参数id是 第一次查找到的子模块的id
+list1.get(i).setChildrole(list2);这个set方法应该就是把list2这个数组加到list下面，成为子节点。
+
+注意: 
+上面查询两次主要是因为第一次查询到的是当前登录用户id所对应权限的一级菜单，第二次就是通过查询到的一次菜单的id值作为第二次查询的pid值，来查找到用户的二级菜单。然后就是通过setChildrole方法吧二级菜单的信息保存到对应的一级菜单中。然后通过request.setAttribute
+
+js:
+  分页 navleft.js
+  加载到这个页面的时候，是在后台已经通过request.setAttribute绑定过pagebean,然后读取。
+  如果name="totalCount"对应的input中的value值>0 就会开始匹配。
+  创建最下面的一条信息，通过数组保存。var pages = [];
+  从页面上获取到分页所需的totalCount(总行数),totalPage（总页数）,currentPage（当前页）
+  首先，默认创建一条信息。通过pages[pages.length]来创建。
+  如果当前的当前页为1的话，通过pages[pages.length]把一些基础信息加入数组中。
+  如果当前页<5。
+  for (var i = 1; i <= (totalPage > 10 ? 10 : totalPage); i++) 循环选择，如果匹配到当前页，那么当前页的样式就会添加一个css样式来进行区分。
+  如果当前页>=总页数-5 例如:显示10个数，从6开始的时候，那就是从2开始到11。以此类推。
+  如果当前页小于总页的时候，下一页和尾页就有css样式并且可以点击。否则，不能点击。
+  通过一些按钮提交到后台的时候，比如点击下一页，就会把数据+1后的值提交到后台。
+  
