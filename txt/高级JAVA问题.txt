@@ -1,0 +1,25 @@
+1.Java内存的分布  http://www.cnblogs.com/snowberg/archive/2011/09/21/2468599.html
+2.GC算法的分类和特点，以及工作区域 http://blog.csdn.net/zhushuai1221/article/details/51419970
+3.CAS原理 http://blog.csdn.net/hsuxu/article/details/9467651
+4.一致性哈希的原理及代码实现 http://blog.csdn.net/ccyours/article/details/51495878
+5.LRU算法原理及代码实现 http://blog.csdn.net/u013400939/article/details/51843040
+6.如何实现一个线程池，以及自定义线程池的参数 http://blog.csdn.net/w2393040183/article/details/52177572
+7.nginx的负载均衡算法有哪几种？ http://blog.csdn.net/gzh0222/article/details/8095994
+8.聚簇索引和非聚簇索引的区别 http://www.cnblogs.com/tutuya/articles/28685.aspx
+9.60W数据高效放入一个hashMap需要注意什么？ http://www.tuicool.com/articles/VFVzM3 找不到
+10. hashMap 解决冲突有哪几种方法？ http://blog.csdn.net/abcd1430/article/details/52745155
+11.servlet是多线程的吗？会有线程安全问题吗，若会遇到何解？如果没有，请说明理由。 http://www.cnblogs.com/binyue/p/4513577.html
+12.简要地举例说明下IOC是什么？SOLID原则是什么？适配器模式或装饰模式接触过吗,接触过请举例。http://www.cnblogs.com/xdp-gacl/p/4249939.html http://blog.csdn.net/e5max/article/details/8872182 http://wenku.baidu.com/link?url=fRCg57c5H71XjcHONLghbF7Eenj33UEy2UJN2EfmgO8mIMoUBDq7ReUSVI5sylQx-2xeuRRWftrHqiVh3KdDOxYS-m1ocL46GHXzgaG1j6G
+13.事务的隔离级别有哪些？事务的传播方式有哪些？默认的传播方式是哪个，表现是什么？http://blog.csdn.net/qq_33290787/article/details/51924963 http://www.360doc.com/content/11/0211/12/18042_92102491.shtml
+14.redis的数据类型有哪几类？如果程序员A误操作导致redis FLUSHALL了，如何恢复？ http://www.360doc.com/content/15/0324/16/5054188_457703414.shtml http://blog.csdn.net/qq_25551295/article/details/48103245
+15.线上不停机快速导入几百万key到redis如何操作？ http://blog.csdn.net/mengxianhua/article/details/51086524
+16.常用的限流措施和算法有哪些？ http://blog.csdn.net/manzhizhen/article/details/52606732
+
+
+1. 集群环境下多个用户访问同一个接口，怎样避免并发产生的数据不一致问题？
+
+2. 线上服务器突然响应变慢，CPU飚高，通过哪些手段定位问题？ https://wenzhang.baidu.com/article/view?key=6e806a73a77c2d34-1442892948
+
+3. 你在开发中有没有遇到过难题，你是怎么解决的？
+
+4. 怎样防止消息队列里的数据重复消费？怎样防止数据丢失？
