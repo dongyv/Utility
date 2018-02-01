@@ -1,0 +1,104 @@
+﻿linux下安装jdk(用rpm安装JDK,前提是将linux版本的jdk已经下载好)
+A
+	1.
+		a. # cd /usr/local (进入local目录)
+		b. # mkdir java (创建java目录)
+		c. # tar -zxvf jdk-...linux-x64.tar.gz(解压)
+		
+	2. 配置环境变量
+		a.# vim ~/.bashrc(添加如下内容)
+					export JAVA_HOME=/usr/local/java/jdk1.8.0_102
+					export JAVA_BIN=$JAVA_HOME/bin
+					export JAVA_LIB=$JAVA_HOME/lib
+					export CLASSPATH=.:$JAVA_LIB/tools.jar:$JAVA_LIB/dt.jar
+					export PATH=$JAVA_BIN:$PATH
+		b. 让修改生效  source ~/.bashrc			
+	
+	3 验证是否配置好环境变量  # java(javac)
+
+
+	
+B.	tomcat安装步骤
+		a. # cd /usr/local (进入local目录)
+		b. # mkdir tomcat (创建tomcat目录)
+		c. # tar xzf apache-tomcat-7.0.69.tar.gz
+		d: # cd /usr/local/tomcat7/apache-tomcat-7.0.69 
+		e: # ./bin/startup.sh(启动tomcat)
+		输出样例：
+				Using CATALINA_BASE:  /usr/local/tomcat7
+				Using CATALINA_HOME:  /usr/local/tomcat7
+				Using CATALINA_TMPDIR: /usr/local/tomcat7/temp
+				Using JRE_HOME:        /opt/jdk1.8.0_05/jre
+				Using CLASSPATH:      /usr/local/tomcat7/bin/bootstrap.jar:/usr/local/tomcat7/bin/tomcat-juli.jar
+				Tomcat started.
+		f. 访问http://ip:8080 
+			附加（个人意愿）：	
+					7.修改tomcat端口
+					编辑Tomcat配置文件
+					#vi cd /usr/local/tomcat7/apache-tomcat-7.0.69/conf/server.xml
+					打开配置文件里找到下面这一段<Connector port="8080" protocol="HTTP/1.1" connectionTimeout="20000" redirectPort="8443" />
+					输入命令 i 进行编辑，将8080 修改为 80 按下ESC按键(退出编辑)
+					输入命令 :wq 保存并退出
+					重启tomcat(shutdown.sh),检测
+
+
+					
+C. 安装mysql
+	1.
+		a. yum install mysql mysql-server --nogpgcheck #询问是否要安装，输入Y即可自动安装,直到安装完成
+		b. /etc/init.d/mysqld start   #启动MySQL
+       		c. chkconfig mysqld on   #设为开机启动
+        	d. cp /usr/share/mysql/my-medium.cnf   /etc/my.cnf  #拷贝配置文件（注意：如果/etc目录下面默认有一个my.cnf，直接覆盖即可）
+		e. shutdown -r now  #重启系统
+		
+	2.	
+		为root账户设置密码
+		mysql_secure_installation
+		回车，根据提示输入Y
+		输入2次密码，回车
+		根据提示一路输入Y
+		最后出现：Thanks for using MySQL!
+		
+       MySql密码设置完成，重新启动 MySQL：
+      /etc/init.d/mysqld stop   #停止
+      /etc/init.d/mysqld start  #启动
+      service mysqld restart    #重启
+	  
+	  Enter Password: <your new password> 
+	3.
+	   修改 etc/my.cnf 文件 添加(修改表名是否区分大小写) 
+	   在my.cnf 文件的mysqld 配置节中 增加 lower_case_table_names =1
+	   重启mysql 服务， service mysql restart	
+
+
+
+
+	首先，登陆mysql
+
+	1.mysql -uroot -p 然后操作mysql库的user表，进行update
+
+	1.  mysql> use mysql;
+	2.  mysql> update user set password=password('root') where user='root' and host='localhost';
+	3.  mysql> flush privileges;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
