@@ -7,7 +7,18 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>Utility Maven Webapp</name>
   <url>http://maven.apache.org</url>
+
+  <properties>
+  	<spring.version>4.1.6.RELEASE</spring.version>
+  </properties>
+
   <dependencies>
+  	<!-- WEB begin -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
   <!-- Http:HttpRequest -->
 	<dependency>
 	    <groupId>org.slf4j</groupId>
