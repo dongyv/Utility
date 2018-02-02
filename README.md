@@ -4,8 +4,10 @@
 2. 网络
 3. 时间
 4. 格式
-***
+
 ### 文件下载
+***
+
 <pre><code>
 HttpHeaders headers = new HttpHeaders();// 设置响应头
 headers.setContentLength(body.length);
@@ -14,4 +16,12 @@ headers.add("Content-Disposition", "attachment;filename=" + fileName);//文件�
 HttpStatus statusCode = HttpStatus.OK;// 设置响应吗
 ResponseEntity<byte[]> response = new ResponseEntity<byte[]>(body, headers, statusCode);
 </code></pre>
-
+<p>pom.xml</p>
+<code><pre>
+<dependency>
+ <groupId>org.springframework</groupId>
+ <artifactId>spring-webmvc</artifactId>
+ <version>${spring.version}</version>
+ </dependency>
+</code></pre>
+<p>response返回,会自动下载到本地</p>
