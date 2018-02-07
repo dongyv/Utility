@@ -30,7 +30,7 @@ public class MD5 {
 	}
 	
 	/**
-	 * ÓÃBASE64¼ÓÃÜ
+	 * ç”¨BASE64åŠ å¯†
 	 * 
 	 * @param str
 	 * @return
@@ -45,7 +45,7 @@ public class MD5 {
 	}
 
 	/**
-	 * ½âÃÜBASE64×Ö´Ü
+	 * è§£å¯†BASE64å­—çªœ
 	 * 
 	 * @param s
 	 * @return
