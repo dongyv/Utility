@@ -1,4 +1,4 @@
-package cglib;
+package IOCAOP.cglib;
 
 public class ProxyExe {
 	public static void main(String[] args) {

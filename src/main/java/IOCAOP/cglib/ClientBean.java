@@ -1,4 +1,4 @@
-package cglib;
+package IOCAOP.cglib;
 
 public class ClientBean {
 	private String name = null;

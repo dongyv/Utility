@@ -1,8 +1,9 @@
-package proxy;
+package IOCAOP.proxy;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
-import aop.UserBeanImpl;
+
+import IOCAOP.aop.UserBeanImpl;
 
 public class UserBeanProxy implements InvocationHandler {
 	private Object targetObject;

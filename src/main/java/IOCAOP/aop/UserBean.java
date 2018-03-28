@@ -1,4 +1,4 @@
-package aop;
+package IOCAOP.aop;
 
 public interface UserBean {
 	  void getUser(); 

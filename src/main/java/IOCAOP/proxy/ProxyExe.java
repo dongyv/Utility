@@ -1,9 +1,9 @@
-package proxy;
+package IOCAOP.proxy;
 
 import java.lang.reflect.Proxy;
 
-import aop.UserBean;
-import aop.UserBeanImpl;
+import IOCAOP.aop.UserBean;
+import IOCAOP.aop.UserBeanImpl;
 
 public class ProxyExe {
 

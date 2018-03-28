@@ -1,4 +1,4 @@
-package com.dql.cla.util;
+package Http;
 
 import okhttp3.*;
 import org.apache.commons.lang3.StringUtils;
@@ -53,13 +53,13 @@ public class OkHttpUtil {
             .build();
 
     /**
-     * okhttp post请求
+     * okhttp post璇锋眰
      *
      * @param url
-     *            请求地址
+     *            璇锋眰鍦板潃
      * @param data
-     *            请求数据
-     * @return 请求返回结果
+     *            璇锋眰鏁版嵁
+     * @return 璇锋眰杩斿洖缁撴灉
      */
     public static String post(String url, String data) {
         Request request;
@@ -89,13 +89,13 @@ public class OkHttpUtil {
 
 
     /**
-     * okhttp jsonPost请求
+     * okhttp jsonPost璇锋眰
      *
      * @param url
-     *            请求地址
+     *            璇锋眰鍦板潃
      * @param data
-     *            请求数据
-     * @return 请求返回结果
+     *            璇锋眰鏁版嵁
+     * @return 璇锋眰杩斿洖缁撴灉
      */
     public static String jsonPost(String url, String data)
     {
@@ -124,13 +124,13 @@ public class OkHttpUtil {
     }
 
     /**
-     * okhttp jsonPost请求
+     * okhttp jsonPost璇锋眰
      *
      * @param url
-     *            请求地址
+     *            璇锋眰鍦板潃
      * @param data
-     *            请求数据
-     * @return 请求返回结果
+     *            璇锋眰鏁版嵁
+     * @return 璇锋眰杩斿洖缁撴灉
      */
     public static String jsonTwoMinutePost(String url, String data)
     {
@@ -161,7 +161,7 @@ public class OkHttpUtil {
 
 
     /**
-     * 120秒超时时间
+     * 120绉掕秴鏃舵椂闂�
      * @param url
      * @param paramsMap
      * @return
@@ -198,8 +198,8 @@ public class OkHttpUtil {
 
 
     /**
-     * 120秒超时时间
-     * 文件传输
+     * 120绉掕秴鏃舵椂闂�
+     * 鏂囦欢浼犺緭
      * @param url
      * @param paramsMap
      * @return
@@ -207,9 +207,9 @@ public class OkHttpUtil {
     public static String postTwoMinFile(String url,Map<String, Object> paramsMap) {
         Request request;
         MultipartBody.Builder builder = new MultipartBody.Builder();
-        //设置类型
+        //璁剧疆绫诲瀷
         builder.setType(MultipartBody.FORM);
-        //追加参数
+        //杩藉姞鍙傛暟
         for (String key : paramsMap.keySet()) {
             Object object = paramsMap.get(key);
             if (object instanceof File) {
@@ -243,11 +243,11 @@ public class OkHttpUtil {
 
 
     /**
-     * okhttp get请求
+     * okhttp get璇锋眰
      *
      * @param url
-     *            请求地址
-     * @return 请求返回结果
+     *            璇锋眰鍦板潃
+     * @return 璇锋眰杩斿洖缁撴灉
      */
     public static String get(String url) {
         Request request = new Request.Builder().url(url).build();
@@ -268,11 +268,11 @@ public class OkHttpUtil {
     }
 
     /**
-     * okhttp get请求
+     * okhttp get璇锋眰
      *
      * @param url
-     *            请求地址
-     * @return 请求返回结果
+     *            璇锋眰鍦板潃
+     * @return 璇锋眰杩斿洖缁撴灉
      */
     public static String get(String url, int connecTimeout, int readTimeout)
     {
